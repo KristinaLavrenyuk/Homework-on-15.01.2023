@@ -1,0 +1,75 @@
+
+#include <iostream>
+using namespace std;
+
+struct {
+    char simb;
+    int num;
+    int num2;
+} req[100]{};
+
+int main()
+{
+    int n, m, t;
+    cin >> n >> m;
+
+    int array[100][100]{};
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cin >> array[i][j];
+        }
+    }
+
+    cin >> t;
+
+    for (int i = 0; i < t; i++)
+    {
+        cin >> req[i].simb;
+        cin >> req[i].num;
+        cin >> req[i].num2;
+    }
+    
+    for (int i = 0; i < t; i++)
+    {
+        switch (req[i].simb)
+        {
+        case '+':
+            for (int j = 0; j < n; j++)
+            {
+                array[j][req[i].num2 - 1] += array[j][req[i].num - 1];
+            }
+            break;
+        case '-':
+            for (int j = 0; j < n; j++)
+            {
+                array[j][req[i].num2 - 1] -= array[j][req[i].num - 1];
+            }
+            break;
+        case '*':
+            for (int j = 0; j < n; j++)
+            {
+                array[j][req[i].num2 - 1] *= array[j][req[i].num - 1];
+            }
+            break;
+        case '/':
+            for (int j = 0; j < n; j++)
+            {
+                array[j][req[i].num2 - 1] /= array[j][req[i].num - 1];
+            }
+            break;
+        }
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = 0; j < m; j++)
+        {
+            cout << array[i][j] << ' ';
+        }
+        cout << endl;
+    }
+    system("pause");
+}
